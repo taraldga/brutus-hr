@@ -1,6 +1,6 @@
 version: "3.8"
 services:
-  mongo:
+  brutus-mongo:
     image: mongo
     container_name: brutus-hr-database
     restart: always
@@ -12,4 +12,13 @@ services:
       - "27017:27017"
     volumes:
       - ./data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
+  
+  mongo-seed:
+    depends_on: 
+      - brutus-mongo
+    build: 
+      context: .
+      dockerfile: ./data/mongo/seed
+    links:
+      - brutus-mongo
   
