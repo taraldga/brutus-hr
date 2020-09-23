@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import AddUserModal from './Components/AddUserModal';
+import UserTable from './Components/UserTable'
+import User from './Models/User'
 
 function App() {
+
+  const [users, setUsers] = useState<User[] | null>(null)
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const fetchUsers = async () => {
+    const result = await fetch('http://localhost:3600/employee');
+    const newUsers = await result.json()
+    setUsers(newUsers);
+  }
+
+  const onModalClosing = () => {
+    setModalOpen(false);
+    fetchUsers();
+  }
+
+  useEffect(() => {
+    fetchUsers()
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>Brutus Employee Application</h1>
+      {users && <UserTable users={users} /> }
+      <AddUserModal isOpen={modalOpen} onClose={() => onModalClosing()} />
+      <button className="btn" onClick={() => setModalOpen(true)}>Add user</button>
     </div>
   );
 }
