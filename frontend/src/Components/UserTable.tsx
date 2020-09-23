@@ -1,7 +1,7 @@
 import React from 'react';
 import User from '../Models/User';
 
-const TableRow: React.FC<{user: User}> = ({user}) => {
+const TableRow: React.FC<{user: User;}> = ({user}) => {
   return (
     <tr>
       <td>{user.first_name}</td>
@@ -35,8 +35,8 @@ const UserTable: React.FC<{users: User[]}> = ({users}) => {
         </tr>
       </thead>
       <tbody>
-        {users.map(user => {
-          return <TableRow user={user} />
+        {users.map((user, idx) => {
+          return <TableRow  key={`user_row_${idx}`} user={user} />
         })}
       </tbody>
     </table>
