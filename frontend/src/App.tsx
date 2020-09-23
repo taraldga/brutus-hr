@@ -16,7 +16,6 @@ function App() {
       url = `${url}?query=${query}`
     }
     const result = await fetch(url);
-    console.log(result)
     const newUsers = await result.json()
     setUsers(newUsers);
   }
