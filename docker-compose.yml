@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  mongo:
+    image: mongo
+    container_name: brutus-hr-database
+    restart: always
+    environment:
+      - MONGO_INITDB_DATABASE=brutus-hr-database
+      - MONGO_INITDB_ROOT_USERNAME=develop
+      - MONGO_INITDB_ROOT_PASSWORD=dev_password
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./data/mongo/001_users.js:/docker-entrypoint-initdb.d/001_users.js:ro
+  
