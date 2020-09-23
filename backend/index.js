@@ -20,9 +20,11 @@ app.listen(PORT_NR, () => {
 
 app.get("/employee", async (req, res) => {
   const limit = req.query.limit ? req.query.limit : 10;
-  const query = req.query.query ? req.query.query : {};
+  const query = req.query.query ? JSON.parse(req.query.query) : {};
+  console.log(query)
   try {
     Employee.find(query).limit(+limit).exec((err, result) => {
+      console.log(result)
       res.json(result)
     });
   } catch(e) {
