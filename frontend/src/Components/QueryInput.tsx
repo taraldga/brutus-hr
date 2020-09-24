@@ -1,6 +1,4 @@
-import { ParsedUrlQueryInput } from 'querystring';
 import React, { useState } from 'react';
-import User from '../Models/User';
 
 const QueryInput: React.FC<{submitQuery: (newQuery: string) => void}> = ({submitQuery}) => {
   const [query, setQuery] = useState("");
