@@ -7,6 +7,9 @@ import cors from'cors';
 const app = express()
 const mongoConnectionString = "mongodb://develop:dev_password@127.0.0.1/brutus-hr-database"
 mongoose.connect(mongoConnectionString, {useNewUrlParser: true})
+mongoose.set('useCreateIndex', true);
+
+
 
 
 const PORT_NR = 3600
